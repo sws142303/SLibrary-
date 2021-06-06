@@ -1,0 +1,14 @@
+单元测试网址：https://blog.csdn.net/chaoyangsun/article/details/80095249
+用Android Studio创建工程的时候，src文件夹下会同时生成三个文件夹main、test、androidTest
+src文件下各文件用处：
+test：文件夹用于写不依赖设备环境的单元测试，即可在PC上直接运行；
+androidTest：文件夹用于写需要在设备上才能运行的测试。
+
+常用注解：
+@Test :标识当前函数是一个测试函数
+@Before :标识当前函数在测试函数执行前执行
+@After ：测试函数执行完成后，执行该函数
+@Ignore ：忽略注释，该函数不进行测试
+
+编写好的工具类,选中类名,右键---> Go To ---> Test可快速生成测试类到src/test或src/androidTest下
+注意导包 ：import static org.junit.Assert.*，否则找不到断言相关函数

@@ -1,0 +1,3 @@
+include ':STools'
+include ':app'
+rootProject.name = "SwsLibrary"

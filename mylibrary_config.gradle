@@ -1,0 +1,50 @@
+/**
+ * 该文件用于配置项目中各种libs引用和项目版本号控制，所有引用都需在该文件中进行操作
+ */
+ext {
+    versions = [
+            compileSdkVersion: 28,//用于告诉Gradle使用那个版本的Android SDK进行项目编译
+            targetSdkVersion : 28,//项目运行环境版本(Android系统会通过判断这个版本,来执行对应行为的api 例如:在当前高系统版本上执行他对应的地版本的api)
+            minSdkVersion    : 16,//项目支持的最低的Android系统版本 具体看Android-API及对应Android系统版本
+            buildToolsVersion: "28.0.3",
+            versionName      : "1.0.0",
+            versionCode      : 1,
+            packName         : "com.mylibrary.swslibrary",
+            constraintlayout : "2.0.4", //Android第六大布局 约束布局
+            appcompat        : "1.2.0",
+            junit            : "4.12",//单元测试
+            testng           : "6.9.6",
+            extjunit         : "1.1.2",
+            espresso         : "3.3.0",//自动化测试
+            retrofit         : "2.5.0", //retrofit网络框架
+            converter_gson   : "2.5.0",//retrofit添加JSON支持
+            rxjava2_adapter  : "1.0.0",//rxJava框架
+            rxlifecycle      : "2.1.0",//RxLifecycle框架，使rxJava有生命周期感应，防止界面退出订阅还未取消，造成内存泄露
+            interceptor      : "3.6.0",//okHttp网络拦截器
+            glide            : "4.8.0" //glide图片加载
+    ]
+}
+
+def develop = [:]
+develop.support = [
+        constraintlayout: "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
+        appcompat       : "androidx.appcompat:appcompat:$versions.appcompat",
+        junit           : "junit:junit:$versions.junit",
+        extjunit        : "androidx.test.ext:junit:$versions.extjunit",
+        espresso        : "androidx.test.espresso:espresso-core:$versions.espresso",
+        testng          : "org.testng:testng:$versions.testng",
+
+]
+//依赖第三方配置
+develop.dependencies = [
+        retrofit        : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        converter_gson  : "com.squareup.retrofit2:converter-gson:$versions.converter_gson",
+        rxjava2_adapter : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$versions.rxjava2_adapter",
+        rxlifecycle     : "com.trello.rxlifecycle2:rxlifecycle-components:$versions.rxlifecycle",
+        interceptor     : "com.squareup.okhttp3:logging-interceptor:$versions.interceptor",
+        "glide"         : "com.github.bumptech.glide:glide:$versions.glide",
+        "glideCompiler": "com.github.bumptech.glide:compiler:$versions.glide",
+]
+
+
+ext.develop = develop

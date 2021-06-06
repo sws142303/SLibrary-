@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply from : '../mylibrary_config.gradle'
+
+android {
+    compileSdkVersion versions.targetSdkVersion
+    defaultConfig {
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: "libs", include: ["*.jar"])
+    api develop.support.constraintlayout
+    api develop.support.appcompat
+    api develop.support.junit
+    api develop.support.testng
+    api develop.support.extjunit
+    api develop.support.espresso,{
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    implementation develop.dependencies.retrofit
+    implementation develop.dependencies.converter_gson
+    implementation develop.dependencies.rxjava2_adapter
+    implementation develop.dependencies.rxlifecycle
+    implementation develop.dependencies.interceptor
+    api develop.dependencies.glide
+    api develop.dependencies.glideCompiler
+
+}
