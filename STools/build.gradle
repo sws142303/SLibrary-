@@ -8,7 +8,6 @@ android {
         targetSdkVersion versions.targetSdkVersion
         versionCode versions.versionCode
         versionName versions.versionName
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -42,5 +41,10 @@ dependencies {
     implementation develop.dependencies.interceptor
     api develop.dependencies.glide
     api develop.dependencies.glideCompiler
-
+    api develop.dependencies.rxbinding
+    api develop.dependencies.lifecycle_extensions
+    api develop.dependencies.recyclerview
+    api develop.dependencies.bindingcollectionadapter
+    api develop.dependencies.bindingcollectionadapter_recyclerview
+//    annotationProcessor group: 'org.projectlombok',name:'lombok',version:'1.18.8'
 }

@@ -11,6 +11,8 @@ ext {
             versionCode      : 1,
             packName         : "com.mylibrary.swslibrary",
             constraintlayout : "2.0.4", //Android第六大布局 约束布局
+            kotlin_version   : "2.2.0", //kotlin
+            multidex_version         : "1.0.3", //multidex
             appcompat        : "1.2.0",
             junit            : "4.12",//单元测试
             testng           : "6.9.6",
@@ -21,7 +23,12 @@ ext {
             rxjava2_adapter  : "1.0.0",//rxJava框架
             rxlifecycle      : "2.1.0",//RxLifecycle框架，使rxJava有生命周期感应，防止界面退出订阅还未取消，造成内存泄露
             interceptor      : "3.6.0",//okHttp网络拦截器
-            glide            : "4.8.0" //glide图片加载
+            glide            : "4.8.0", //glide图片加载
+            rxbinding        : "2.1.1",//rxbinding
+            lifecycle_extensions : "2.0.0",//Google AAC
+            recyclerview     : "1.0.0",//recyclerview
+            bindingcollectionadapter : "2.2.0"//recyclerview的databinding套装
+
     ]
 }
 
@@ -33,7 +40,8 @@ develop.support = [
         extjunit        : "androidx.test.ext:junit:$versions.extjunit",
         espresso        : "androidx.test.espresso:espresso-core:$versions.espresso",
         testng          : "org.testng:testng:$versions.testng",
-
+        kotlin          : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+        multidex        : "com.android.support:multidex:$versions.multidex_version"
 ]
 //依赖第三方配置
 develop.dependencies = [
@@ -44,7 +52,10 @@ develop.dependencies = [
         interceptor     : "com.squareup.okhttp3:logging-interceptor:$versions.interceptor",
         "glide"         : "com.github.bumptech.glide:glide:$versions.glide",
         "glideCompiler": "com.github.bumptech.glide:compiler:$versions.glide",
+        "rxbinding": "com.jakewharton.rxbinding2:rxbinding:$versions.rxbinding",
+        "lifecycle_extensions": "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle_extensions",
+        "recyclerview": "androidx.recyclerview:recyclerview:$versions.recyclerview",
+        "bindingcollectionadapter": "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$versions.bindingcollectionadapter",
+        "bindingcollectionadapter_recyclerview": "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$versions.bindingcollectionadapter",
 ]
-
-
 ext.develop = develop

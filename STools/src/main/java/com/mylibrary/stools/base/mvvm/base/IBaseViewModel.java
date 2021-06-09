@@ -1,16 +1,16 @@
-package com.mylibrary.stools.base.mvvm;
+package com.mylibrary.stools.base.mvvm.base;
+
 
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
 /**
- * @author Sws
- * @Time 2021/6/6 17:13
- * @msg
- **/
-interface IBaseViewModel extends LifecycleEventObserver {
+ * Created by goldze on 2017/6/15.
+ */
+
+public interface IBaseViewModel extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
     void onAny(LifecycleOwner owner, Lifecycle.Event event);
@@ -34,13 +34,12 @@ interface IBaseViewModel extends LifecycleEventObserver {
     void onPause();
 
     /**
-     * 注册事件监听
+     * 注册RxBus
      */
-    void registerEvt();
+    void registerRxBus();
 
     /**
-     * 取消注册事件监听
+     * 移除RxBus
      */
-    void unregisterEvt();
-
+    void removeRxBus();
 }

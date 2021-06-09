@@ -11,6 +11,14 @@ android {
         versionName versions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        /**
+         * 解決項目异常：Annotation processors must be explicitly declared now
+         */
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
 
     buildTypes {
@@ -24,10 +32,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':STools')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    api 'com.android.support:multidex:1.0.3'
-
-
+    api develop.support.appcompat
+    api develop.support.kotlin
+    api develop.support.constraintlayout
+    api develop.support.multidex
 }
