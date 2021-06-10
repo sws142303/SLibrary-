@@ -10,6 +10,14 @@ android {
         versionName versions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        /**
+         * 解決項目异常：Annotation processors must be explicitly declared now
+         */
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
 
     dataBinding {
@@ -34,13 +42,13 @@ dependencies {
     api develop.support.espresso,{
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    implementation develop.dependencies.retrofit
-    implementation develop.dependencies.converter_gson
-    implementation develop.dependencies.rxjava2_adapter
-    implementation develop.dependencies.rxlifecycle
-    implementation develop.dependencies.interceptor
-    api develop.dependencies.glide
-    api develop.dependencies.glideCompiler
+    api develop.dependencies.retrofit
+    api develop.dependencies.converter_gson
+    api develop.dependencies.rxjava2_adapter
+    api develop.dependencies.rxlifecycle
+    api develop.dependencies.interceptor
+    implementation develop.dependencies.glide
+    implementation develop.dependencies.glideCompiler
     api develop.dependencies.rxbinding
     api develop.dependencies.lifecycle_extensions
     api develop.dependencies.recyclerview

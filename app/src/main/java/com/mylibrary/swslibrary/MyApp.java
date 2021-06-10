@@ -4,13 +4,15 @@ import android.app.Application;
 
 import androidx.multidex.MultiDex;
 
+import com.mylibrary.stools.base.mvvm.base.BaseApplication;
+
 /**
  * @ClassName MyApp
  * @Description TODO
  * @Author 史文胜
  * @Date 2020/12/12 11:23
  */
-public class MyApp extends Application {
+public class MyApp extends BaseApplication {
 
     @Override
     public void onCreate() {

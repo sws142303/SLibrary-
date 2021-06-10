@@ -21,6 +21,13 @@ android {
         }
     }
 
+    /**
+     * 启用dateBinding
+     */
+    dataBinding {
+        enabled true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
