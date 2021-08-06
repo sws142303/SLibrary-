@@ -2,6 +2,7 @@ package com.mylibrary.stools.base.mvvm.base;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,6 +14,7 @@ import com.mylibrary.stools.base.mvvm.bus.event.SingleLiveEvent;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,7 @@ import io.reactivex.functions.Consumer;
  * Created by goldze on 2017/6/15.
  */
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel implements IBaseViewModel, Consumer<Disposable> {
+    protected String TAG = this.getClass().getName();
     protected M model;
     private UIChangeLiveData uc;
     //弱引用持有

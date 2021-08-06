@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
-import com.mylibrary.stools.base.mvvm.utils.Utils;
+import com.mylibrary.stools.utils.Utils;
 
 /**
  * Created by goldze on 2017/6/15.
