@@ -36,7 +36,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         initData();
         initListener();
-        fullScreen(this);
+        if (isFullScreen()){
+            fullScreen(this);
+        }
+    }
+
+    /**
+     * 是否设置沉浸式状态栏
+     * @return
+     */
+    public boolean isFullScreen(){
+        return false;
     }
 
     /**

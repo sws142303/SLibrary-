@@ -1,10 +1,16 @@
 package com.mylibrary.stools.base.mvvm.base;
 
 
+import android.app.Activity;
 import android.content.Intent;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 import androidx.annotation.Nullable;
@@ -38,6 +44,9 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected String TAG = this.getClass().getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (isFullScreen()){
+            fullScreen(this);
+        }
         super.onCreate(savedInstanceState);
         ActivityManager.addActivity(this,getClass());
         //页面接受的参数方法
@@ -52,6 +61,38 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         initViewObservable();
         //注册RxBus
         viewModel.registerRxBus();
+    }
+
+    /**
+     * 通过设置全屏，设置状态栏透明
+     *
+     * @param activity
+     */
+    private void fullScreen(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
+                Window window = activity.getWindow();
+                View decorView = window.getDecorView();
+                //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+                int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                decorView.setSystemUiVisibility(option);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                //导航栏颜色也可以正常设置
+//                window.setNavigationBarColor(Color.TRANSPARENT);
+            } else {
+                Window window = activity.getWindow();
+                WindowManager.LayoutParams attributes = window.getAttributes();
+                int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+                int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+                attributes.flags |= flagTranslucentStatus;
+//                attributes.flags |= flagTranslucentNavigation;
+                window.setAttributes(attributes);
+            }
+        }
     }
 
     @Override
@@ -241,5 +282,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      */
     public <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
         return ViewModelProviders.of(activity).get(cls);
+    }
+
+    /**
+     * 是否设置沉浸式状态栏
+     * @return
+     */
+    public boolean isFullScreen(){
+        return false;
     }
 }
