@@ -1,4 +1,4 @@
-package com.mylibrary.swslibrary.callback;
+package com.mylibrary.swslibrary.keyboard;
 
 /**
  * @author Sws

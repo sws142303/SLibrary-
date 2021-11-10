@@ -5,6 +5,8 @@ import android.app.Application;
 import androidx.multidex.MultiDex;
 
 import com.mylibrary.stools.base.mvvm.base.BaseApplication;
+import com.mylibrary.stools.permission.XXPermissions;
+import com.mylibrary.swslibrary.permission.PermissionInterceptor;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -18,7 +20,11 @@ public class MyApp extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        //bugly初始化
         CrashReport.initCrashReport(getApplicationContext(), "11468437be", false);
         MultiDex.install(this);
+
+        // 设置权限申请拦截器（全局设置）
+        XXPermissions.setInterceptor(new PermissionInterceptor());
     }
 }

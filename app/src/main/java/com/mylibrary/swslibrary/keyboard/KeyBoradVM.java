@@ -1,4 +1,4 @@
-package com.mylibrary.swslibrary;
+package com.mylibrary.swslibrary.keyboard;
 
 import android.app.Application;
 

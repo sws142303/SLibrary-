@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.common.eventbus.EventBus;
 import com.mylibrary.stools.base.ActivityManager;
 
 /**
@@ -119,5 +120,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         ActivityManager.removeActivity(this);
         super.onDestroy();
+    }
+
+    /**
+     * 是否注册事件分发
+     *
+     * @return true 注册；false 不注册，默认不注册
+     */
+    protected boolean isRegisteredEventBus() {
+        return false;
     }
 }

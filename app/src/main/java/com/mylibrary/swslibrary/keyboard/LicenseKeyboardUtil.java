@@ -1,17 +1,13 @@
-package com.mylibrary.swslibrary.utils;
+package com.mylibrary.swslibrary.keyboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
-import com.mylibrary.swslibrary.KeyBoradActivity;
 import com.mylibrary.swslibrary.R;
-import com.mylibrary.swslibrary.callback.OnKeyBoardClick;
+import com.mylibrary.swslibrary.keyboard.OnKeyBoardClick;
 
 /**
  * @author Sws

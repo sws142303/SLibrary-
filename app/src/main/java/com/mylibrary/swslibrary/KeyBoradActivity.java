@@ -1,28 +1,26 @@
 package com.mylibrary.swslibrary;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mylibrary.stools.base.mvvm.base.BaseActivity;
 import com.mylibrary.stools.base.mvvm.binding.command.BindingAction;
 import com.mylibrary.stools.base.mvvm.binding.command.BindingCommand;
-import com.mylibrary.swslibrary.callback.OnKeyBoardClick;
 import com.mylibrary.swslibrary.databinding.ActivityKeyBoradBinding;
-import com.mylibrary.swslibrary.utils.LicenseKeyboardUtil;
+import com.mylibrary.swslibrary.keyboard.KeyBoradVM;
+import com.mylibrary.swslibrary.keyboard.LicenseKeyboardUtil;
 
-public class KeyBoradActivity extends BaseActivity<ActivityKeyBoradBinding,KeyBoradVM> {
+/**
+ * 车牌号键盘--相关  keyboard
+ */
+public class KeyBoradActivity extends BaseActivity<ActivityKeyBoradBinding, KeyBoradVM> {
 //implements View.OnClickListener
     private EditText button;
 

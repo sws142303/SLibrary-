@@ -13,6 +13,7 @@ import com.mylibrary.stools.base.mvvm.http.Result;
 import com.mylibrary.swslibrary.bean.UserInfoBean;
 import com.mylibrary.swslibrary.http.request.TestRequestBean;
 import com.mylibrary.swslibrary.http.response.TestResponseBean;
+import com.mylibrary.swslibrary.permission.PermissionActivity;
 
 /**
  * @author Sws
@@ -34,7 +35,7 @@ public class MainVM extends BaseViewModel {
     public View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            onBackPressed();
+            startActivity(PermissionActivity.class);
         }
     };
 
