@@ -11,6 +11,11 @@ import android.util.Log;
 public class SLog {
     private static String TAG = "SLog";
     public static void e(String msg){
-        Log.e(TAG,msg);
+//        Log.e(TAG,msg);
+    print(msg);
+    }
+
+    public static void print(Object msg){
+        System.out.println(msg);
     }
 }
