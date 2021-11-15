@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="act"
+            type="com.mylibrary.swslibrary.KeyBoradActivity" />
+    </data>
+    <RelativeLayout
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#00ffffff">
+
+        <!--<EditText
+            binding:isThrottleFirst="@{Boolean.TRUE}"
+            binding:onClickCommand="@{act.click}"
+            android:id="@+id/btn_add_car"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="输入车牌"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:textColor="#FFFFFF"
+            android:background="#15A0F5"/>-->
+
+        <Button
+            binding:onClickCommand="@{act.click}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            >
+            <android.inputmethodservice.KeyboardView
+                android:id="@+id/keyboard_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:paddingTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:focusableInTouchMode="true"
+                android:background="#F0EFF4"
+                android:keyBackground="@android:color/white"
+                android:keyTextColor="#5E5E5E"
+                android:shadowColor="#ffffff"
+                android:shadowRadius="0.0"
+                android:keyTextSize="18sp"
+                android:labelTextSize="18sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

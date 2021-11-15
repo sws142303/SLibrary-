@@ -19,7 +19,6 @@ import java.util.List;
 
 public class PermissionActivity extends BaseActivity<ActivityPermissionBinding,PermissionVM> {
 
-
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_permission;
@@ -40,6 +39,7 @@ public class PermissionActivity extends BaseActivity<ActivityPermissionBinding,P
                XXPermissions.with(PermissionActivity.this)
                        .permission(Permission.CAMERA)
                        .request(new OnPermissionCallback() {
+
                            @Override
                            public void onGranted(List<String> permissions, boolean all) {
                                if (all) {
