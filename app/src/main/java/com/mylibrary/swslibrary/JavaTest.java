@@ -71,8 +71,12 @@ public class JavaTest {
             }
         });
 
-        //Lambda表达式
+        //Lambda表达式 单行需要有返回值
         Collections.sort(names, (a, b) -> b.compareTo(a));
+        //Lambda表达式 多行需要有返回值
+        Collections.sort(names,(a,b) -> {
+            return b.compareTo(a);
+        });
 
         /**
          * 练习Lambda表达式
@@ -84,11 +88,14 @@ public class JavaTest {
 
             }
         });
-        //使用Lambda表达式
+
+        //使用Lambda表达式 多行不需要有返回值
         TestLambda testLambda2 = new TestLambda((position,index,msg) -> {
             SLog.print(position);
             SLog.print(index);
             SLog.print(msg);
         });
+        //使用Lambda表达式 单行不需要有返回值
+        TestLambda testLam = new TestLambda((position,index,msg) -> SLog.print(msg));
     }
 }

@@ -1,8 +1,15 @@
 package com.mylibrary.swslibrary.lambda;
 
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
+
 import com.mylibrary.swslibrary.utils.SLog;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Sws
@@ -20,9 +27,37 @@ public class TestLambda {
     /**
      * 触发回调
      */
-    public void onClick() {
+   private void onClick() {
        if (mInterface != null) {
             mInterface.onTestLambdaClick(1222, 2111, "312121");
         }
+    }
+
+    /**
+     * 练习Lambda表达式
+     */
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void testLambda(OnLog onLog){
+
+        //练习一
+        String[] boysArray = {"张三","李四","王五","马六","JackLove","uzi","Sws"};
+        List<String> boysList = Arrays.asList(boysArray);
+        //正常遍历boysList集合
+        for (String boy : boysList) {
+            onLog.onLog("正常遍历boysList ：" + boy);
+        }
+        //使用Lambda表达式遍历
+        //使用“->”在传递值的时候使用
+        boysList.forEach((boy) -> {onLog.onLog("使用Lambda表达式遍历boysList："+boy);});
+        //使用双冒号“::”可以直接输出内容
+        boysList.forEach(onLog::onLog);
+
+        //练习二
+        
+
+    }
+
+    public interface OnLog{
+        void onLog(String msg);
     }
 }

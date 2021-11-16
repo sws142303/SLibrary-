@@ -1,5 +1,7 @@
 package com.mylibrary.swslibrary.kotlin
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.mylibrary.swslibrary.lambda.TestLambda
 import com.mylibrary.swslibrary.utils.SLog
 import kotlin.math.abs
@@ -9,6 +11,8 @@ import kotlin.math.abs
  *@Time 2021/11/15 21:37
  *@msg
  **/
+//@RequiresApi的作用：仅仅是让编译通过，而并没有避免低版本的系统运行高版本的api的问题，在使用时我们需要自己判断版本号来使用不同的api。
+@RequiresApi(Build.VERSION_CODES.N)
 fun main() {
     //kotlin会根据值类型 自动将变量设置为该类型
     //Int类型变量（kotlin自动转换）
@@ -47,6 +51,10 @@ fun main() {
      */
     val testLambda = TestLambda { a, b, c ->
         SLog.print("a = $a b = $b c = $c")
+    }
+
+    testLambda.testLambda{
+        SLog.print(it)
     }
 }
 
