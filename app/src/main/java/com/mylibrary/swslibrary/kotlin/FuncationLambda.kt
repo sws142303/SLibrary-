@@ -10,6 +10,7 @@ import com.mylibrary.swslibrary.utils.SLog
  *@Time 2021/11/16 21:48
  *@msg
  **/
+@RequiresApi(Build.VERSION_CODES.N)
 fun main() {
     /**
      * 调用带返回值的函数体
@@ -58,10 +59,14 @@ fun main() {
 
     //认识kotlin中的it
     test3()
+
+    //调用下划线"_"方法
+    test4()
 }
 
 /**
  * 创建一个有返回值的函数
+ * （判断传入的参数 是否大于100 返回boolean类型）
  */
 fun functionLear(days: Int): Boolean {
     return days > 100
@@ -94,6 +99,7 @@ class Person {
 
 /**
  * 创建静态类 类中的方法为静态方法
+ * 通过object关键字来创建静态类
  */
 object NumUtil {
     fun double(int: Int): Int {
@@ -119,8 +125,9 @@ fun read(b: List<Int>, off: Int = 0, len: Int = b.size) {
  */
 fun append(vararg str: String): String {
     val append = StringBuffer()
+    //char当做String数组进行遍历，将传递进来的单个或者多个参数拼接 并返回
     for (char in str) {
-        append.append(char)
+        append.append(char + ",")
     }
     return append.toString()
 }

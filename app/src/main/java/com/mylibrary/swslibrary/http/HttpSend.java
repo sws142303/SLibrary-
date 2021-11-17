@@ -1,6 +1,6 @@
 package com.mylibrary.swslibrary.http;
 
-import com.mylibrary.stools.base.mvvm.http.Result;
+import com.mylibrary.stools.http.Result;
 import com.mylibrary.swslibrary.http.request.TestRequestBean;
 import com.mylibrary.swslibrary.http.response.TestResponseBean;
 

@@ -1,4 +1,4 @@
-package com.mylibrary.stools.base.mvvm.http;
+package com.mylibrary.stools.http;
 
 /**
  * 和Http有关的常量字段

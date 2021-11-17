@@ -8,13 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.mylibrary.stools.base.mvvm.base.BaseViewModel;
-import com.mylibrary.stools.base.mvvm.http.OnHttpObservableCallBack;
-import com.mylibrary.stools.base.mvvm.http.Result;
 import com.mylibrary.swslibrary.bean.UserInfoBean;
-import com.mylibrary.swslibrary.http.request.TestRequestBean;
-import com.mylibrary.swslibrary.http.response.TestResponseBean;
 import com.mylibrary.swslibrary.kotlin.TestKotlinActivity;
-import com.mylibrary.swslibrary.permission.PermissionActivity;
 
 /**
  * @author Sws

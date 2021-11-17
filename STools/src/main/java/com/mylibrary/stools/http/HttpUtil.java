@@ -1,4 +1,4 @@
-package com.mylibrary.stools.base.mvvm.http;
+package com.mylibrary.stools.http;
 
 
 
