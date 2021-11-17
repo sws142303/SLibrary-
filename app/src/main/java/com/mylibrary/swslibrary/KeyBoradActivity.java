@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.mylibrary.stools.base.mvvm.base.BaseActivity;
-import com.mylibrary.stools.base.mvvm.binding.command.BindingAction;
-import com.mylibrary.stools.base.mvvm.binding.command.BindingCommand;
+import com.mylibrary.stools.command.BindingAction;
+import com.mylibrary.stools.command.BindingCommand;
 import com.mylibrary.swslibrary.databinding.ActivityKeyBoradBinding;
 import com.mylibrary.swslibrary.keyboard.KeyBoradVM;
 import com.mylibrary.swslibrary.keyboard.LicenseKeyboardUtil;

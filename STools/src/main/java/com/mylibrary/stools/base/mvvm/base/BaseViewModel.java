@@ -2,7 +2,6 @@ package com.mylibrary.stools.base.mvvm.base;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,11 +9,10 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
-import com.mylibrary.stools.base.mvvm.bus.event.SingleLiveEvent;
+import com.mylibrary.stools.bus.event.SingleLiveEvent;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -24,7 +24,7 @@ import androidx.test.internal.util.LogUtil;
 
 
 import com.mylibrary.stools.base.ActivityManager;
-import com.mylibrary.stools.base.mvvm.bus.Messenger;
+import com.mylibrary.stools.bus.Messenger;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.ParameterizedType;

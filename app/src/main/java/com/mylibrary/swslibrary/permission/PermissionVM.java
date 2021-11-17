@@ -7,10 +7,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.mylibrary.stools.base.mvvm.base.BaseViewModel;
-import com.mylibrary.stools.base.mvvm.bus.event.SingleLiveEvent;
-import com.mylibrary.stools.permission.OnPermissionCallback;
-import com.mylibrary.stools.permission.Permission;
-import com.mylibrary.stools.permission.XXPermissions;
+import com.mylibrary.stools.bus.event.SingleLiveEvent;
+
 
 import java.util.List;
 

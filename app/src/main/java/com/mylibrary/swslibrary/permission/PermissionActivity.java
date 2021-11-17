@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.mylibrary.stools.base.mvvm.base.BaseActivity;
-import com.mylibrary.stools.base.mvvm.bus.event.SingleLiveEvent;
+import com.mylibrary.stools.bus.event.SingleLiveEvent;
 import com.mylibrary.stools.permission.OnPermissionCallback;
 import com.mylibrary.stools.permission.Permission;
 import com.mylibrary.stools.permission.XXPermissions;
