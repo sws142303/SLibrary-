@@ -1,9 +1,9 @@
 package com.mylibrary.swslibrary.kotlin
 
-import android.view.View
-import android.widget.TextView
+import android.app.slice.Slice
 import com.mylibrary.swslibrary.utils.SLog
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  *@author Sws
@@ -22,10 +22,11 @@ fun main() {
     //调用KotlinClass的次构造方法二
     val testKotlinClass3 = KotlinClass(18, "通过次构造二 创建KotlinClass实例", 30)
     SLog.print(
-            "输出KotlinClass \r\n " +
-                    "实例一 = $testKotlinClass1 \r\n " +
-                    "实例二 = $testKotlinClass2 \r\n " +
-                    "实例三 = $testKotlinClass3")
+        "输出KotlinClass \r\n " +
+                "实例一 = $testKotlinClass1 \r\n " +
+                "实例二 = $testKotlinClass2 \r\n " +
+                "实例三 = $testKotlinClass3"
+    )
 
     /**
      * 继承
@@ -65,6 +66,36 @@ fun main() {
      * 抽象类
      */
     FilePrinter().print()
+
+    /**
+     * Kotlin中的接口
+     */
+    StudyAS(1000)
+
+    /**
+     * class实现多个接口,不同的接口中有重复的方法
+     */
+    StudyC(true) //调用接口A
+    StudyC(false)//调用接口B
+
+    /**
+     * 调用数据类
+     */
+    Address("Sws-帅哥", 168)
+
+    /**
+     * 对象表达式
+     */
+    test9()
+    testDataUtil()//非匿名方式
+
+    /**
+     * 伴生对象
+     * 可以直接通过类名 + "."来访问当前类的伴生对象中定义的字段和方法
+     */
+    SLog.print("伴生对象 Student.mStudent = ${Student.mStudent}")
+    Student.study()
+
 }
 
 /**
@@ -180,10 +211,11 @@ class Dog3(age: Int) : Animal(age) {
  *
  */
 //方式一
-val a: Int get() {
-    //通过get 返回该变量a的值 为168
-    return 168
-}
+val a: Int
+    get() {
+        //通过get 返回该变量a的值 为168
+        return 168
+    }
 
 //方式二
 //在变量类型后面加一个？ 表示该变量可以为null
@@ -235,7 +267,9 @@ class Test {
     //判断shop是否被初始化
     fun test() {
         //::表示创建成员引用或类引用
-        if (::shop.isInitialized) SLog.print("变量的延时初始化 shop.isInitialized = ${::shop.isInitialized}") else SLog.print("shop 未初始化")
+        if (::shop.isInitialized) SLog.print("变量的延时初始化 shop.isInitialized = ${::shop.isInitialized}") else SLog.print(
+            "shop 未初始化"
+        )
     }
 }
 
@@ -254,5 +288,173 @@ class FilePrinter : Printer() {
     override fun print() {
         SLog.print("FilePrinter继承Printer这个抽象类 实现print抽象方法")
     }
+}
+
+/**
+ * Kotlin中的接口定义
+ */
+interface Study {
+    //kotlin中接口里面也可以定义变量 但是只能是抽象的 赋值由实现接口的class完成
+    val time: Int //抽象
+
+    //discuss方法没有自己的方法实现 会默认定义为一个抽象方法
+    fun discuss()
+
+    //Kotlin中接口可以有自己的方法实现 java中是不行的
+    fun learnCourses() {
+        SLog.print("Kotlin中的接口定义 Study -- learnCourses")
+    }
+}
+
+//实现Study接口 Study接口中定义的time变量有StudyAs来完成赋值
+class StudyAS(override val time: Int) : Study {
+
+    init {
+        discuss()
+        learnCourses()
+    }
+
+    override fun discuss() {
+        ////discuss方法没有自己的方法实现 会默认定义为一个抽象方法 抽象方法必须实现
+        SLog.print("实现Study接口 StudyAS discuss time = $time")
+    }
+
+    /**
+     * 实现Study类中的learnCourses
+     */
+    override fun learnCourses() {
+        //调用Study类中的learnCourses
+        super.learnCourses()
+    }
 
 }
+
+/**
+ * 问题思考 class实现多个接口 不同的接口中有重复的方法 如何解决这种情况？
+ * 可以通过<接口名>.方法名 来调用指定接口的方法
+ */
+interface StudyA {
+    fun foot() {
+        SLog.print("StudyA foot")
+    }
+}
+
+interface StudyB {
+    fun foot() {
+        SLog.print("StudyB foot")
+    }
+}
+
+class StudyC(isA2: Boolean) : StudyA, StudyB {
+    val isA = isA2;
+
+    init {
+        foot()
+    }
+
+    override fun foot() {
+        if (isA) {
+            super<StudyA>.foot()
+        } else {
+            super<StudyB>.foot()
+        }
+    }
+
+
+}
+
+/**
+ * Kotlin中的数据类（date class 修饰的类叫数据类）
+ * 1.数据类的主构造中必须要有最少一个参数，普通类则不会。
+ * 2.主构造的参数可以用val或者var进行修饰
+ * 3.数据类不可以使用open或者abstract来修饰 （open的作用是允许其他类继承 abstract是定义抽象类 ），数据类是不能被其他类继承的
+ */
+data class Address(val name: String, val number: Int) {
+    var city: String = ""
+
+    init {
+        print()
+    }
+
+    fun print() {
+        SLog.print("Address-print city = $city")
+    }
+}
+
+/**
+ * 对象表达式与对象声明
+ */
+open class Address2(name2: String) {
+   open val name = name2
+    open fun print() {
+        SLog.print("对象表达式 Address2 name = $name")
+    }
+}
+
+class Shop2 {
+    var mShop2: Address2? = null
+    fun addAddress2(mShop2: Address2) {
+        this.mShop2 = mShop2
+        mShop2.print()
+    }
+}
+
+fun test9() {
+    /**
+     * 这种情况是适合只想改变Address2这个类中的print方法 但是又不想重新生成一个类 就可以使用对象表达式来完成。
+     * 这种方法必须实现目标类的构造方法，且重写的方法需要用open来修饰，否则无法访问
+     * 格式为：object : 类名(){}
+     */
+    Shop2().addAddress2(object : Address2("Android") {
+        override fun print() {
+            SLog.print("对象表达式与对象声明 test9 name = $name")
+        }
+    })
+
+    /**
+     * 这种情况是，但是又不想重新生成一个类 只想要随便一个类 类中有两个int类型的字段 可以使用这种方式来创建
+     * 格式为：object {}
+     */
+    test10()
+}
+
+/**
+ * 对象申明 匿名类
+ */
+fun test10(){
+    //不需要在通过class来创建一个类
+    //适合需要一个简单的对象时 可以通过对象声明的方式来得到一个对象(匿名对象)
+    val adHoc = object {
+       var x:Int = 10
+        var y:Int = 20
+    }
+    SLog.print("通过对象声明的方式来得到一个对象 adHoc.x = ${adHoc.x} adHoc.y = ${adHoc.y}")
+}
+
+/**
+ * 对象申明 非匿名类
+ */
+object DataUtil{
+     fun<T> isEmpty(list: ArrayList<T>?) : Boolean{
+        return list?.isEmpty() ?: false
+     }
+}
+fun testDataUtil(){
+    val list = arrayListOf(1,2,3)
+    SLog.print("对象申明 非匿名类 testDataUtil result = ${DataUtil.isEmpty(list)}")
+}
+
+/**
+ * 伴生对象
+ */
+class Student(name: String){
+    //通过companion object 来给Student创建一个伴生对象
+    companion object{
+        val mStudent = Student("android")
+        fun study(){
+            SLog.print("伴生对象 study")
+        }
+
+    }
+}
+
