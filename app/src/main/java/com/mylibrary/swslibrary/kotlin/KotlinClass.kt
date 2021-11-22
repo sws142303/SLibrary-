@@ -22,10 +22,10 @@ fun main() {
     //调用KotlinClass的次构造方法二
     val testKotlinClass3 = KotlinClass(18, "通过次构造二 创建KotlinClass实例", 30)
     SLog.print(
-        "输出KotlinClass \r\n " +
-                "实例一 = $testKotlinClass1 \r\n " +
-                "实例二 = $testKotlinClass2 \r\n " +
-                "实例三 = $testKotlinClass3"
+            "输出KotlinClass \r\n " +
+                    "实例一 = $testKotlinClass1 \r\n " +
+                    "实例二 = $testKotlinClass2 \r\n " +
+                    "实例三 = $testKotlinClass3"
     )
 
     /**
@@ -81,7 +81,14 @@ fun main() {
     /**
      * 调用数据类
      */
-    Address("Sws-帅哥", 168)
+    val mAddress = Address("Sws-帅哥", 168)
+    mAddress.city = "北京"
+    mAddress.print()
+    //对象复制
+    val mAddressNew = mAddress.copy(name = "Sws-还是大帅哥")
+    val mAddressNew2 = mAddress.copy(name = "Sws-还是大帅哥",number = 1688888888)
+    SLog.print("对象复制 mAddressNew name = ${mAddressNew.name} number = ${mAddressNew.number}")
+    SLog.print("对象复制 mAddressNew2 name = ${mAddressNew2.name} number = ${mAddressNew2.number}")
 
     /**
      * 对象表达式
@@ -95,6 +102,9 @@ fun main() {
      */
     SLog.print("伴生对象 Student.mStudent = ${Student.mStudent}")
     Student.study()
+    //调用伴生对象的扩展方法与参数
+    Student.Companion.test()
+    SLog.print(Student.Companion.newParam)
 
 }
 
@@ -268,7 +278,7 @@ class Test {
     fun test() {
         //::表示创建成员引用或类引用
         if (::shop.isInitialized) SLog.print("变量的延时初始化 shop.isInitialized = ${::shop.isInitialized}") else SLog.print(
-            "shop 未初始化"
+                "shop 未初始化"
         )
     }
 }
@@ -308,7 +318,7 @@ interface Study {
 
 //实现Study接口 Study接口中定义的time变量有StudyAs来完成赋值
 class StudyAS(override val time: Int) : Study {
-
+    //类中的init函数 可以用来做一些初始化的操作
     init {
         discuss()
         learnCourses()
@@ -323,7 +333,7 @@ class StudyAS(override val time: Int) : Study {
      * 实现Study类中的learnCourses
      */
     override fun learnCourses() {
-        //调用Study类中的learnCourses
+        //调用Study接口中实现的learnCourses方法
         super.learnCourses()
     }
 
@@ -348,19 +358,20 @@ interface StudyB {
 class StudyC(isA2: Boolean) : StudyA, StudyB {
     val isA = isA2;
 
+    //类中的init函数 可以用来做一些初始化的操作
     init {
         foot()
     }
 
     override fun foot() {
         if (isA) {
+            //执行StudyA中的foot函数
             super<StudyA>.foot()
         } else {
+            //执行StudyB中的foot函数
             super<StudyB>.foot()
         }
     }
-
-
 }
 
 /**
@@ -371,13 +382,8 @@ class StudyC(isA2: Boolean) : StudyA, StudyB {
  */
 data class Address(val name: String, val number: Int) {
     var city: String = ""
-
-    init {
-        print()
-    }
-
     fun print() {
-        SLog.print("Address-print city = $city")
+        SLog.print("Address-print city = $city name = $name number = $number")
     }
 }
 
@@ -385,7 +391,7 @@ data class Address(val name: String, val number: Int) {
  * 对象表达式与对象声明
  */
 open class Address2(name2: String) {
-   open val name = name2
+    open val name = name2
     open fun print() {
         SLog.print("对象表达式 Address2 name = $name")
     }
@@ -403,11 +409,20 @@ fun test9() {
     /**
      * 这种情况是适合只想改变Address2这个类中的print方法 但是又不想重新生成一个类 就可以使用对象表达式来完成。
      * 这种方法必须实现目标类的构造方法，且重写的方法需要用open来修饰，否则无法访问
-     * 格式为：object : 类名(){}
+     * 格式为：
+     * 单个父类格式为  object : 类名(){}
+     * 多个父类格式为  object : 父类1(),父类2(){}
      */
-    Shop2().addAddress2(object : Address2("Android") {
+    Shop2().addAddress2(object : Address2("Android"),Study {
         override fun print() {
             SLog.print("对象表达式与对象声明 test9 name = $name")
+        }
+
+        override val time: Int
+            get() = 111
+
+        override fun discuss() {
+            SLog.print("对象表达式与对象声明 test9 discuss time = $time")
         }
     })
 
@@ -421,12 +436,12 @@ fun test9() {
 /**
  * 对象申明 匿名类
  */
-fun test10(){
+fun test10() {
     //不需要在通过class来创建一个类
     //适合需要一个简单的对象时 可以通过对象声明的方式来得到一个对象(匿名对象)
     val adHoc = object {
-       var x:Int = 10
-        var y:Int = 20
+        var x: Int = 10
+        var y: Int = 20
     }
     SLog.print("通过对象声明的方式来得到一个对象 adHoc.x = ${adHoc.x} adHoc.y = ${adHoc.y}")
 }
@@ -434,27 +449,51 @@ fun test10(){
 /**
  * 对象申明 非匿名类
  */
-object DataUtil{
-     fun<T> isEmpty(list: ArrayList<T>?) : Boolean{
+object DataUtil {
+    fun <T> isEmpty(list: ArrayList<T>?): Boolean {
         return list?.isEmpty() ?: false
-     }
+    }
 }
-fun testDataUtil(){
-    val list = arrayListOf(1,2,3)
+
+fun testDataUtil() {
+    val list = arrayListOf(1, 2, 3)
     SLog.print("对象申明 非匿名类 testDataUtil result = ${DataUtil.isEmpty(list)}")
 }
 
 /**
  * 伴生对象
  */
-class Student(name: String){
+class Student(name: String) {
+
     //通过companion object 来给Student创建一个伴生对象
-    companion object{
+    //格式为 companion object 伴生对象名() {}
+    //如果定义了伴生对象名 可以通过类名.伴生对象名来获取伴生对象本身
+    //如果未定义伴生对象名 可以通过类名.Companion来获取伴生对象本身
+
+/*
+    //示例一(未省略伴生对象名)
+    companion object objectName{
         val mStudent = Student("android")
         fun study(){
             SLog.print("伴生对象 study")
         }
+    }*/
 
+    //示例二(省略伴生对象名)
+    //通过companion object 来给Student创建一个伴生对象
+    companion object {
+        val mStudent = Student("android")
+        fun study() {
+            SLog.print("伴生对象 study")
+        }
     }
 }
+
+fun Student.Companion.test() {
+    SLog.print("为Student的伴生对象扩展一个方法")
+}
+
+val Student.Companion.newParam: String
+    get() = "为Student的伴生对象扩展一个字段"
+
 
