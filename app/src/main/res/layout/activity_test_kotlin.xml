@@ -7,6 +7,7 @@
     tools:context=".kotlin.TestKotlinActivity">
 
     <TextView
+        android:id="@+id/tv_test"
         android:gravity="center"
         android:layout_gravity="center"
         android:text="Welcome to Kotlin"

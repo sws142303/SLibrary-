@@ -3,6 +3,7 @@ package com.mylibrary.swslibrary.kotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import com.mylibrary.swslibrary.R
 import com.mylibrary.swslibrary.utils.SLog
 import kotlin.math.abs
@@ -27,6 +28,14 @@ class TestKotlinActivity : AppCompatActivity() {
         SLog.e("num2toInt：$toInt")
         val toString = num2.toString()
         SLog.e("num2toString：$toString")
+
+        /**
+         * 测试扩展函数
+         */
+        val mTextView = find<TextView>(R.id.tv_test)
+        R.id.tv_test.onCLick(this){
+            mTextView.text = "测试扩展函数"
+        }
     }
 
     /**
