@@ -9,9 +9,14 @@ import com.mylibrary.swslibrary.utils.SLog
  *@msg
  **/
 fun main() {
-
     //案例测试
     fire(ApiGetArticles())
+
+    val test1 = listOf<String>("1","2","3")
+    val test2 = listOf<Int>(1,2,3)
+    SLog.print("result = ${isArray(test1)}")
+    SLog.print("result = ${isArray(test2)}")
+
 }
 
 //创建一个注解 名为ApiDoc 通过annotation class来修饰
@@ -63,6 +68,10 @@ fun fire(api: Api){
    val annotations = api.javaClass.annotations
    val method =  annotations.find { it is HttpMethod } as? HttpMethod
     SLog.print("通过反射来获取当前注解使用的请求类型 method = ${method?.method}")
+}
+
+fun isArray(a:Any) : Boolean{
+   return a is Array<*>
 }
 
 

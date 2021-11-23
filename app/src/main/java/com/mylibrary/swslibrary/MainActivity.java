@@ -22,6 +22,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding,MainVM> {
     @Override
     public void initData() {
         super.initData();
-
     }
 }

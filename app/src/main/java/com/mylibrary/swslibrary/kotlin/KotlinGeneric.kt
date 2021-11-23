@@ -9,9 +9,10 @@ import com.mylibrary.swslibrary.utils.SLog
  **/
 fun main() {
     /**
-     * 泛型接口
+     * 实现泛型接口
      */
-    SLog.print("Coke().taste().price value = ${Coke().taste().price}")
+    val coke = Coke()
+    coke.taste()
 
     /**
      * 泛型类
@@ -25,46 +26,59 @@ fun main() {
 }
 
 /**
- * 泛型接口
+ * 泛型接口 通过interface来定义一个接口，制定泛型为 T
  */
 interface Drinks<T> {
-    fun taste(): T
-    fun price(t: T)
+    fun taste() : T //定义抽象方法taste 返回值为泛型T
+    fun price(t: T) //定义抽象方法taste 入参为泛型T
 }
-
-class Sweet {
-    val price = 5
+//定义一个Sweet类
+open class Sweet {
+    //定义一个Int常量
+    open var price = 5
+    open var name = "Sweet"
 }
-
+//使用泛型接口
 class Coke : Drinks<Sweet> {
     override fun taste(): Sweet {
-        SLog.print("Coke taste")
-        return Sweet()
-    }
+        SLog.print("实现泛型接口 Coke taste")
+        //通过方法表达式 更改Sweet类中的字段值
+        val mSweet = object : Sweet(){
+            override var price: Int
+                get() = 16888
+                set(value) {}
 
+            override var name: String
+                //                get() = super.name //使用父类的name值
+                get() = "Sws--帅哥"   //覆盖父类变量值
+                set(value) {}
+        }
+        price(mSweet)
+        return mSweet
+    }
     override fun price(t: Sweet) {
-        SLog.print("Coke price value = ${t.price}")
+        SLog.print("实现泛型接口 Coke price price = ${t.price} name = ${t.name}")
     }
-
-
 }
 
 /**
- * 泛型类
+ * 泛型类相关
+ * 为Color抽象类添加泛型为T 且Color主构造需要一个T类型的参数
  */
 abstract class Color<T>(var t2: T/*泛型字段*/) {
     abstract fun printColor()
 }
-
+//定义Blue类
 class Blue() {
+    //定义color常量
     val color: String = "Blue"
 }
-
+//定义BlueColor类 实现Color泛型类（也是一个抽象类）
 class BlueColor(t: Blue) : Color<Blue>(t) {
     override fun printColor() {
+        //可以直接访问父类Color中的泛型字段t2
         SLog.print("BlueColor-printColor color = ${t2.color}")
     }
-
 }
 
 /**
