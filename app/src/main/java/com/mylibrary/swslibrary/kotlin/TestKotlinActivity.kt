@@ -17,7 +17,7 @@ class TestKotlinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_kotlin)
-        loadParamsType(num1)
+        /*loadParamsType(num1)
         loadParamsType(num2)
         loadParamsType(num3)
         loadParamsType(intNumber)
@@ -27,7 +27,7 @@ class TestKotlinActivity : AppCompatActivity() {
         val toInt = num2.toInt()
         SLog.e("num2toInt：$toInt")
         val toString = num2.toString()
-        SLog.e("num2toString：$toString")
+        SLog.e("num2toString：$toString")*/
 
         /**
          * 测试扩展函数

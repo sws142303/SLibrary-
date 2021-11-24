@@ -32,9 +32,13 @@ fun main() {
     SLog.print("调用String的扩展属性LastChar = ${"Sws大帅哥呀".lastChar}")
 
     /**
-     * 为伴生对象添加扩展函数
+     * 为伴生对象添加扩展函数。
+     * 调用Jump的伴生对象的扩展函数。
      */
+    //方式一
     Jump.Companion.print()
+    //方式二
+    Jump.print()
 
     /**
      * let扩展
@@ -72,7 +76,8 @@ fun <T> MutableList<T>.swap2(index1: Int, index2: Int) {
 
 /**
  * 扩展属性
- * 为String定义一个扩展属性 该属性对应的value为String字符串的最后一个字符
+ * 为String类型的变量常量定义一个扩展属性 该属性对应的value为String字符串的最后一个字符。
+ * 原理解析：其实在Java中 相当于定义了一个getLastChar(String s)静态方法 该方法返回String参数的最后一个字符
  */
 // 写法一
 //val String.lastChar : Char get() = this.get(this.length -1)
@@ -80,7 +85,7 @@ fun <T> MutableList<T>.swap2(index1: Int, index2: Int) {
 val String.lastChar: Char get() = this[this.length - 1]
 
 /**
- * 为Jump的伴生对象添加一个扩展函数
+ * 为Jump的伴生对象添加一个扩展函数print
  */
 fun Jump.Companion.print() {
     SLog.print(" 为Jump的伴生对象添加一个扩展函数")
