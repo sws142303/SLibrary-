@@ -9,7 +9,7 @@ import java.util.ArrayList
 /**
  *@author Sws
  *@Time 2021/12/5 21:36
- *@msg 管理zhan
+ *@msg activity管理
  **/
 class ActivityManager private constructor() {
     //创建一个list 使用弱引用的方式防止内存泄漏

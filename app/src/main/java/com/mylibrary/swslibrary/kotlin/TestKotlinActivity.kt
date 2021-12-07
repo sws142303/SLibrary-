@@ -8,6 +8,8 @@ import com.mylibrary.swslibrary.R
 import com.mylibrary.swslibrary.utils.SLog
 import kotlin.math.abs
 
+import kotlinx.android.synthetic.main.activity_test_kotlin.*
+
 class TestKotlinActivity : AppCompatActivity() {
     private val num1 = 1;
     private val num2 = -1.0;
@@ -32,10 +34,16 @@ class TestKotlinActivity : AppCompatActivity() {
         /**
          * 测试扩展函数
          */
-        val mTextView = find<TextView>(R.id.tv_test)
+        /*val mTextView = find<TextView>(R.id.tv_test)
         R.id.tv_test.onCLick(this){
             mTextView.text = "测试扩展函数"
+        }*/
+
+
+        tv_test.setOnClickListener(){
+            tv_test.text = "测试扩展函数"
         }
+
     }
 
     /**

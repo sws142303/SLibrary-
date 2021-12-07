@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,10 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.test.internal.util.LogUtil;
 
 
-import com.mylibrary.stools.base.ActivityManager;
 import com.mylibrary.stools.bus.Messenger;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -42,13 +39,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected VM viewModel;
     private int viewModelId;
     protected String TAG = this.getClass().getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (isFullScreen()){
+        if (isFullScreen()) {
             fullScreen(this);
         }
         super.onCreate(savedInstanceState);
-        ActivityManager.addActivity(this,getClass());
         //页面接受的参数方法
         initParam();
         //私有的初始化Databinding和ViewModel方法
@@ -97,14 +94,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     @Override
     protected void onDestroy() {
-        ActivityManager.removeActivity(this);
         super.onDestroy();
         //解除Messenger注册
         Messenger.getDefault().unregister(viewModel);
         if (viewModel != null) {
             viewModel.removeRxBus();
         }
-        if(binding != null){
+        if (binding != null) {
             binding.unbind();
         }
     }
@@ -286,9 +282,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     /**
      * 是否设置沉浸式状态栏
+     *
      * @return
      */
-    public boolean isFullScreen(){
+    public boolean isFullScreen() {
         return false;
     }
 }

@@ -12,8 +12,7 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.common.eventbus.EventBus;
-import com.mylibrary.stools.base.ActivityManager;
+import com.mylibrary.stools.utils.ActivityManager;
 
 /**
  * @author Sws
@@ -32,7 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         this.setContentView(getLayoutID());
-        ActivityManager.addActivity(this,getClass());
         getBaseIntent();
         initView();
         initData();
@@ -118,7 +116,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mBasePresenter != null) {
             mBasePresenter.detachView();
         }
-        ActivityManager.removeActivity(this);
         super.onDestroy();
     }
 
