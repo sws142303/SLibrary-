@@ -25,15 +25,15 @@ class ActivityManager private constructor() {
     private var front = true
 
     //返回栈顶activity
-    val topActivity : Activity?
-    get() {
-        if (activityStartCount <= 0) {
+    val topActivity: Activity?
+        get() {
+            if (activityStartCount <= 0) {
+                return null
+            } else {
+                return activityRefs[activityRefs.size - 1].get()
+            }
             return null
-        }else{
-         return activityRefs[activityRefs.size -1].get()
         }
-        return null
-    }
 
     /**
      * 通过inner来将InnerActivityLifecycleCallbacks设置为一个内部类 这样就可以访问ActivityManager中的函数和变量。
@@ -62,7 +62,7 @@ class ActivityManager private constructor() {
 
         override fun onActivityStopped(activity: Activity?) {
             activityStartCount--
-            if (activityStartCount <= 0 && front){
+            if (activityStartCount <= 0 && front) {
                 front = false
                 onFrontBackChange(front)
             }
@@ -86,7 +86,7 @@ class ActivityManager private constructor() {
      * 应用前后台切换
      */
     private fun onFrontBackChange(front: Boolean) {
-        for (callBack in frontBackCallback){
+        for (callBack in frontBackCallback) {
             callBack.onChanged(front)
         }
     }
