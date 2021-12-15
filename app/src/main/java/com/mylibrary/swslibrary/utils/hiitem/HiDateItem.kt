@@ -11,7 +11,7 @@ import java.util.*
  *@Time 2021/12/9 22:18
  *@msg
  **/
-abstract class HiDateItem<DATE, VH : RecyclerView.ViewHolder>(date: Date) {
+abstract class HiDateItem<Date, VH : RecyclerView.ViewHolder>(date: Date) {
     private lateinit var adapter: HiAdapter
     var mData: Date? = null
 
