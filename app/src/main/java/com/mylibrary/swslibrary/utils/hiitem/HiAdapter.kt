@@ -117,7 +117,7 @@ class HiAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     /**
      * RecyclerView与Adapter相关联的时候会触发onAttachedToRecyclerView这个方法
-     * 可以在这个方法中对多列的item做宽度适配
+     * 可以在这个方法中对多列的item做宽度适  配
      */
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
