@@ -32,7 +32,8 @@ public class MainVM extends BaseViewModel {
         @Override
         public void onClick(View v) {
 //            startActivity(PermissionActivity.class);
-            startActivity(TestKotlinActivity.class);
+//            startActivity(TestKotlinActivity.class);
+            startActivity(TestHiAdapterActivity.class);
         }
     };
 
