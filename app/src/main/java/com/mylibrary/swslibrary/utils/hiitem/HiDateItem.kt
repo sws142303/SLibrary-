@@ -20,7 +20,7 @@ abstract class HiDateItem<Date, VH : RecyclerView.ViewHolder>(date: Date) {
     }
 
 
-    abstract fun onBindData(holder: RecyclerView.ViewHolder, position: Int)
+    abstract fun onBindData(holder: VH, position: Int)
 
     /**
      * 关联adapter
