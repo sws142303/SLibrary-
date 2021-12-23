@@ -20,10 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestHiAdapterActivity"></activity>
-        <activity android:name=".kotlin.TestKotlinActivity" />
+        <activity android:name=".study.kotlin.language.TestKotlinActivity" />
         <activity android:name=".permission.PermissionActivity" />
-        <activity android:name=".KeyBoradActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

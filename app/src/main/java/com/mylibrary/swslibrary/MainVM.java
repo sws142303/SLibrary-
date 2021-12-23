@@ -8,8 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.mylibrary.stools.base.mvvm.base.BaseViewModel;
-import com.mylibrary.swslibrary.bean.UserInfoBean;
-import com.mylibrary.swslibrary.kotlin.TestKotlinActivity;
+import com.tencent.bugly.crashreport.biz.UserInfoBean;
 
 /**
  * @author Sws
@@ -18,30 +17,14 @@ import com.mylibrary.swslibrary.kotlin.TestKotlinActivity;
  **/
 public class MainVM extends BaseViewModel {
 
-    public UserInfoBean mBean = new UserInfoBean();
-
-
-    public ObservableField<String> name = new ObservableField<>("ces");
-
     public MainVM(@NonNull Application application) {
         super(application);
     }
-
-
-    public View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-//            startActivity(PermissionActivity.class);
-//            startActivity(TestKotlinActivity.class);
-            startActivity(TestHiAdapterActivity.class);
-        }
-    };
 
     @Override
     public void onResume() {
         super.onResume();
         Log.e(TAG,"onResume");
-
     }
 
     @Override
