@@ -18,13 +18,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mylibrary.stools.base.mvvm.base.BaseActivity;
 import com.mylibrary.swslibrary.databinding.ActivityMainBinding;
 import com.mylibrary.swslibrary.study.datebinding.TestDataBindingActivity;
+import com.mylibrary.swslibrary.study.testview.TestViewActivity;
 import com.mylibrary.swslibrary.study.thread.TestThreadActivity;
 
 import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
 
-    private String[] itemsArray = new String[]{"测试Item"};
+    private String[] itemsArray = new String[]
+            {
+                    "线程",
+                    "自定义View"
+            };
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -94,7 +99,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
     private void onClickEvt(int p) {
         switch (p) {
             case 0:
+                //线程练习
                 startActivity(new Intent(this, TestThreadActivity.class));
+                break;
+
+            case 1:
+                //自定义View
+                startActivity(new Intent(this, TestViewActivity.class));
                 break;
         }
     }
