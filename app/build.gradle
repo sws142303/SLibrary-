@@ -55,4 +55,6 @@ dependencies {
 
     //libs相关
     implementation files('libs/bugly_crash_release.jar')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

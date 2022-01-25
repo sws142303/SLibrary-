@@ -3,6 +3,7 @@ package com.mylibrary.swslibrary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mylibrary.stools.base.mvvm.base.BaseActivity;
 import com.mylibrary.swslibrary.databinding.ActivityMainBinding;
+import com.mylibrary.swslibrary.study.datebinding.TestDataBindingActivity;
+import com.mylibrary.swslibrary.study.thread.TestThreadActivity;
 
 import java.util.List;
 
@@ -91,7 +94,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
     private void onClickEvt(int p) {
         switch (p) {
             case 0:
-                Toast.makeText(this, "测试", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, TestThreadActivity.class));
                 break;
         }
     }

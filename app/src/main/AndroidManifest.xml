@@ -20,6 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".study.thread.TestThreadActivity"></activity>
+        <activity android:name=".study.datebinding.TestDataBindingActivity" />
         <activity android:name=".study.kotlin.language.TestKotlinActivity" />
         <activity android:name=".permission.PermissionActivity" />
         <activity
@@ -31,6 +33,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".study.thread.MyIntentService"/>
     </application>
 
 </manifest>
