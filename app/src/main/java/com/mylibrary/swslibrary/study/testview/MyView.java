@@ -47,20 +47,20 @@ public class MyView extends View {
         /*
          * 设置绘制模式
          */
-        mPaint.setStyle(Paint.Style.FILL); //填充模式
-//        mPaint.setStyle(Paint.Style.STROKE);  //画线模式（即勾边模式）
+//        mPaint.setStyle(Paint.Style.FILL); //填充模式
+        mPaint.setStyle(Paint.Style.STROKE);  //画线模式（即勾边模式）
         // mPaint.setStyle(Paint.Style.FILL_AND_STROKE);  //两种模式一并使用：既画线又填充。它的默认值是 FILL，填充模式。
 
         /*
          * 如果绘制模式选择的是STROKE 或者 FILL_AND_STROKE
          * 就可以通过setStrokeWidth来设置线条的宽度
          */
-        mPaint.setStrokeWidth(5); // 线条宽度为 20 像素
+        mPaint.setStrokeWidth(5);
 
         /*
          * 设置绘制图形的颜色
          */
-        mPaint.setColor(Color.BLUE);
+        mPaint.setColor(Color.BLACK);
 //        mPaint.setARGB(100, 100, 200, 100);
 
         /**
@@ -114,7 +114,7 @@ public class MyView extends View {
          * 批量绘制点
          */
         //点的集合
-        float[] points = {
+        /*float[] points = {
                 50,50,
                 100,100,
                 150,150,
@@ -124,11 +124,27 @@ public class MyView extends View {
                 350,350,
                 400,400
         };
-        canvas.drawPoints(points, 0 /* 跳过两个数，即前两个 0 */,
-                points.length /* 一共绘制 8 个数（4 个点）*/, mPaint);
+        canvas.drawPoints(points, 0 *//* 从集合的那个位置开始绘制*//*,
+                points.length *//* 一共绘制集合中的几个元素 两个数为一个点*//*, mPaint);*/
 
 
+        /*
+         * 奥运五环
+         */
 
+        mPaint.setStyle(Paint.Style.STROKE);  //画线模式（即勾边模式）
+        mPaint.setStrokeWidth(15);
+
+        mPaint.setColor(Color.BLUE);
+        canvas.drawCircle(point.x / 2 - 220,point.y / 2,100,mPaint);
+        mPaint.setColor(Color.BLACK);
+        canvas.drawCircle(point.x / 2,point.y / 2,100,mPaint);
+        mPaint.setColor(Color.RED);
+        canvas.drawCircle(point.x / 2 + 220,point.y / 2,100,mPaint);
+        mPaint.setColor(Color.YELLOW);
+        canvas.drawCircle(point.x / 2 - 120,point.y / 2 + 100,100,mPaint);
+        mPaint.setColor(Color.GREEN);
+        canvas.drawCircle(point.x / 2 + 120,point.y / 2 + 100,100,mPaint);
 
     }
 

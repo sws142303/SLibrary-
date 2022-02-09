@@ -37,13 +37,14 @@ public class PermissionActivity extends BaseActivity<ActivityPermissionBinding,P
            @Override
            public void onChanged(Object o) {
                XXPermissions.with(PermissionActivity.this)
-                       .permission(Permission.CAMERA)
+//                       .permission(Permission.CAMERA)
+                       .permission(Permission.GET_ACCOUNTS)
                        .request(new OnPermissionCallback() {
 
                            @Override
                            public void onGranted(List<String> permissions, boolean all) {
                                if (all) {
-                                   Toast.makeText(getApplication(), "获取拍照权限成功", Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(getApplication(), "获取权限成功", Toast.LENGTH_SHORT).show();
                                }
                            }
                        });

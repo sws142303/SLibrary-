@@ -30,7 +30,7 @@ public class PermissionVM extends BaseViewModel {
     public View.OnClickListener startCLick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Toast.makeText(getApplication(), "哈哈哈哈", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "请求权限", Toast.LENGTH_SHORT).show();
             startPermission.postValue("");
         }
     };
