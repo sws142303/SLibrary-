@@ -133,7 +133,7 @@ public class TestThreadActivity extends AppCompatActivity {
 
     //方式三 使用ThreadHandle +  Handle来实现主线程给子线程发消息。
     static class MyHandle extends Handler {
-        public MyHandle(Looper looper) {
+        MyHandle(Looper looper) {
             super(looper);
         }
 
