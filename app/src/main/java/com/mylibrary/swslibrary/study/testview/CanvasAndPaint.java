@@ -15,7 +15,7 @@ import com.mylibrary.swslibrary.R;
 /**
  * @author Sws
  * @time 15:37 2022/2/14
- * @dec
+ * @dec Canvas的drawXXX系列以及Paint常用api
  **/
 public class CanvasAndPaint {
     private Paint mPaint;
@@ -387,7 +387,7 @@ public class CanvasAndPaint {
     private void testDrawArc(Canvas canvas) {
         mPaint.setStyle(Paint.Style.FILL);
 
-        /*//通过drawArc来绘制饼图
+        //通过drawArc来绘制饼图
         //第一部分
         RectF rectF1 = new RectF(100,100,600,600);
         mPaint.setColor(Color.parseColor("#FF4040"));
@@ -416,7 +416,7 @@ public class CanvasAndPaint {
         //第六部分
         mPaint.setColor(Color.parseColor("#ADD8E6"));
         RectF rectF6 = new RectF(100,130,610,620);
-        canvas.drawArc(rectF6,95,85,true,mPaint);*/
+        canvas.drawArc(rectF6,95,85,true,mPaint);
     }
 
     /*

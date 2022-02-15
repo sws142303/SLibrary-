@@ -50,7 +50,12 @@ public class MyView extends View {
         getDisplay().getRealSize(point);
 
         //Canvas的drawXXX()及Paint的基本使用
-        initCanvasAndPaint(canvas);
+//        initCanvasAndPaint(canvas);
+
+        //Paint详解
+        PaintDetailsApi.getInstance().testPaintApi(canvas,getContext());
+
+
   }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
