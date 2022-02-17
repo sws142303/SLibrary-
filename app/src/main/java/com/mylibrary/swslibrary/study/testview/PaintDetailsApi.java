@@ -59,8 +59,8 @@ public class PaintDetailsApi {
         initColorApi(canvas, context);
         //效果相关Api
         initEffectApi(canvas, context);
-        //drawText相关Api
-        initDrawTextApi(canvas,context);
+        //drawText相关Api(内容较多，单独抽出来)
+        PaintDrawTextApi.getInstance().initPaintDrawTextApi(canvas,context);
         //初始化相关Api
         initPaintApi(canvas,context);
     }
@@ -82,10 +82,6 @@ public class PaintDetailsApi {
 
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);*/
-    }
-
-    private void initDrawTextApi(Canvas canvas, Context context) {
-
     }
 
     /**
@@ -289,7 +285,7 @@ public class PaintDetailsApi {
          *  MaskFilter 有两种： BlurMaskFilter 和 EmbossMaskFilter.
          */
 
-       /* //TODO BlurMaskFilter (模糊效果的 MaskFilter。)
+       /* //TODO 1.BlurMaskFilter (模糊效果的 MaskFilter。)
         // 构造参数：
         // radius 参数是模糊的范围
         // style 是模糊的类型。一共有四种：NORMAL（内外都模糊绘制）,SOLID（内部正常绘制，外部模糊）,INNER（内部模糊，外部不绘制）,OUTER（内部不绘制，外部模糊）。
@@ -297,7 +293,7 @@ public class PaintDetailsApi {
         mPaint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
         canvas.drawBitmap(bitmap, 100, 100, mPaint);*/
 
-        /*//TODO EmbossMaskFilter (浮雕效果的 MaskFilter。)
+        /*//TODO 2.EmbossMaskFilter (浮雕效果的 MaskFilter。)
         // 构造参数：
         // direction 是一个 3 个元素的数组，指定了光源的方向；
         // ambient 是环境光的强度，数值范围是 0 到 1；
