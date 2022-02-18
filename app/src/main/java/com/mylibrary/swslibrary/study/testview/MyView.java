@@ -55,6 +55,10 @@ public class MyView extends View {
         //Paint详解
         PaintDetailsApi.getInstance().testPaintApi(canvas,getContext());
 
+        //范围裁切和几何变换
+        CanvasClipApi.getInstance().setPoint(point);
+        CanvasClipApi.getInstance().initAPiTest(getContext(),canvas);
+
 
   }
 
