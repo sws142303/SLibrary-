@@ -1,0 +1,136 @@
+Handler大致流程
+    1.Handler创建：
+    1.1 构造参数：
+        // callback -- 处理消息的回调接口，可以为null。
+        // async – 设置消息是否异步，即不受Looper同步障碍的约束。async为true时，会调用Message.setAsynchronous()函数。
+        // looper – 消息队列循环器，不能为空。如果传null会报错。创建Handler时，使用Handler的无参构造，会默认通过Looper.myLooper()获取与当前线程关联的Looper，如果获取返回null，则抛出异常（new RuntimeException("Can't create handler inside thread " + Thread.currentThread() + " that has not called Looper.prepare()");）
+
+     1.2 构造方法
+     1.2.1 核心构造方法：
+     (1) public Handler (Callback callback, boolean async);
+     //逻辑处理：
+     // 1.检查FIND_POTENTIAL_LEAKS是否为true，如果为true，检查当前class是否为匿名，本地，成员class，检测是否为static修饰的静态类，如果不是则log输出警告日志。 注：FIND_POTENTIAL_LEAKS，目前是Handler私有变量，未提供外界访问入口。默认为false。
+     // 2.通过Looper.myLooper()，取得与当前线程关联的Looper。如果取出来的Looper为null。则抛出异常（throw new RuntimeException(
+                                                                                         "Can't create handler inside thread " + Thread.currentThread()
+                                                                                          + " that has not called Looper.prepare()");）。
+     // 3.Looper不为null，则通过mLooper.mQueue得到消息处理队列（MessageQueue）。
+     // 4.callback，async参数绑定。不对value做非空校验。
+
+     （2）public Handler(Looper looper, Callback callback, boolean async);
+     //处理逻辑：
+     // looper,callback,async参数绑定。该构造Looper一定是非null的。所以会通过传入的Looper调用looper.mQueue得到消息处理队列（MessageQueue）。
+
+     1.2.2 其他构造方法：
+      （1）public Handler();
+      //内部调用 public Handler (Callback callback, boolean async)构造。为：this(null,null);
+
+      （2）public Handler(Callback callback);
+      //内部调用 public Handler (Callback callback, boolean async)构造。为：this(callback,null);
+
+      （3）public Handler(Looper looper);
+      //内部调用 public Handler(Looper looper, Callback callback, boolean async) 为：this(looper, null, false);
+
+      （4）public Handler(Looper looper, Callback callback);
+      //内部调用 public Handler(Looper looper, Callback callback, boolean async) 为：this(looper, callback, false);
+
+      （5）public Handler(boolean async);
+      //内部调用 public Handler (Callback callback, boolean async)构造。为：this(null, async);
+
+      （6） Handler createAsync(@NonNull Looper looper);
+      //介绍：通过指定looper，得到一个异步机制的Handler。
+      //内部调用 public Handler (Callback callback, boolean async)构造。为：new Handler(looper, null, true);
+
+      （7）Handler createAsync(@NonNull Looper looper, @NonNull Callback callback);
+      //介绍：通过指定looper与callback，得到一个异步机制的Handler。
+      //内部调用 public Handler (Callback callback, boolean async)构造。为：new Handler(looper, callback, true);
+
+    2.使用Handler发送消息：
+     （1）public final boolean sendMessage(Message msg);
+      //介绍：在当前时间之前的所有待处理消息之后，将消息推送到消息队列的末尾。它将在附加到此处理程序的线程中的handleMessage中接收。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 public final boolean sendMessageDelayed(Message msg, long delayMillis) 发送消息。 如：sendMessageDelayed(msg, 0);
+
+     （2）public final boolean sendEmptyMessage(int what);
+      //介绍：发送仅包含 what 值的Message。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 public final boolean sendEmptyMessageDelayed(int what, long delayMillis) 发送消息。 如：sendEmptyMessageDelayed(what, 0);
+
+     （3）public final boolean sendEmptyMessageDelayed(int what, long delayMillis);
+      //介绍：发送仅包含 what 值的Message，在指定的时间（时间单位：毫秒）过后发送。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 public final boolean sendMessageDelayed(Message msg, long delayMillis) 发送消息。 如：sendMessageDelayed(msg, delayMillis);
+
+     （4）public final boolean sendEmptyMessageAtTime(int what, long uptimeMillis);
+      //介绍：发送仅包含 what 值的Message，在特定时间传递该消息。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 public boolean sendMessageAtTime(Message msg, long uptimeMillis) 发送消息。 如：sendMessageAtTime(msg, uptimeMillis);
+
+     （5）public final boolean sendMessageDelayed(Message msg, long delayMillis);
+      //介绍：在之前的所有未处理消息之后将当前消息排入消息队列（当前时间 + delayMillis）。将在handleMessage中收到它，在附加到此处理程序的线程中。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 public boolean sendMessageAtTime(Message msg, long uptimeMillis) 发送消息。 如：sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);
+
+     （6）public boolean sendMessageAtTime(Message msg, long uptimeMillis);
+      //介绍：在绝对时间（以毫秒为单位） uptimeMillis之前的所有待处理消息之后，将消息排入消息队列。默认时间是SystemClock.uptimeMillis 。在深度睡眠中花费的时间会增加执行的额外延迟。您将在handleMessage中收到它，在附加到此处理程序的线程中。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) 将消息加入消息队列。如：enqueueMessage(queue, msg, uptimeMillis); queue为创建handler时，从looper中获取的MessageQueue。
+
+     （7）public final boolean sendMessageAtFrontOfQueue(Message msg);
+      //介绍：将当前消息放到消息队列的前面，以在消息循环的下一次迭代中处理。您将在handleMessage中收到它，在附加到此处理程序的线程中。这种方法只在非常特殊的情况下使用——它很容易使消息队列饿死，导致排序问题，或者有其他意想不到的副作用。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用 private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) 将消息加入消息队列。如：enqueueMessage(queue, msg, 0); queue为创建handler时，从looper中获取的MessageQueue。
+
+     （8）public final boolean executeOrSendMessage(Message msg);
+      //介绍：如果当前Looper（处理器）对应当前线程（处理器），则同步执行消息。否则将通过sendMessage(msg); 将其推送到消息队列（MessageQueue）。
+      //返回值说明 ：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用：通过 public void dispatchMessage(Message msg) 将消息进行同步处理，或者通过 public final boolean sendMessage(Message msg) 将消息加入消息队列。
+
+     （9） private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis)
+      //介绍：Handler创建时async如果为true（标识消息异步），则通过Message的 public void setAsynchronous(boolean async) 更新Message的标识。如：msg.setAsynchronous(true); 紧接着通过queue(当前Handler对应的消息队列)，执行MessageQueue的 boolean enqueueMessage(Message msg, long when) 函数，将消息加入消息队列。
+      //返回值说明：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+      //内部调用：通过 MessageQueue的 boolean enqueueMessage(Message msg, long when) 函数，将消息加入消息队列。
+
+    3.发送任务（其实就是将传入的Runnable 赋值给了一个新new的Message 的 callback，并将该消息添加到消息队列）：
+
+      注：getPostMessage方法，功能为将runnable,obj,what等参数封装到Message中，并将生成的Message返回。（参数可同时存在或不存在）
+
+     （1） public final boolean post(Runnable r)
+     //介绍：使 Runnable r 添加到消息队列中。可运行对象将在附加此处理程序的线程上运行。
+     //返回值说明：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出
+     //内部调用：通过 public final boolean sendMessageDelayed(Message msg, long delayMillis) 将消息加入消息队列。如：sendMessageDelayed(getPostMessage(r), 0);
+
+     （2）public final boolean postAtTime(Runnable r, long uptimeMillis)
+         public final boolean postAtTime(Runnable r, Object token, long uptimeMillis)
+     //介绍：使 Runnable r 添加到消息队列中，在uptimeMillis给定的特定时间运行。时基是SystemClock.uptimeMillis 。在深度睡眠中花费的时间会增加执行的额外延迟。可运行对象将在附加此处理程序的线程上运行
+     //返回值说明：如果 Runnable 已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出。请注意，结果为 true 并不意味着 Runnable 将被处理——如果在消息的传递时间发生之前退出 looper，则消息将被丢弃。
+     //内部调用：通过 public boolean sendMessageAtTime(Message msg, long uptimeMillis) 将消息加入消息队列。如：sendMessageAtTime(getPostMessage(r), uptimeMillis);
+     //内部调用：通过 public boolean sendMessageAtTime(Message msg, long uptimeMillis) 将消息加入消息队列。如：sendMessageAtTime(getPostMessage(r, token), uptimeMillis);
+
+     （3） public final boolean postDelayed(Runnable r, long delayMillis)
+           public final boolean postDelayed(Runnable r, Object token, long delayMillis)
+      //介绍：使 Runnable r 添加到消息队列中，在经过指定的时间后运行。可运行对象将在附加此处理程序的线程上运行。时基是SystemClock.uptimeMillis 。在深度睡眠中花费的时间会增加执行的额外延迟
+      //返回值说明：如果 Runnable 已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出。请注意，结果为 true 并不意味着 Runnable 将被处理——如果在消息的传递时间发生之前退出 looper，则消息将被丢弃。
+      //内部调用：通过 public final boolean sendMessageDelayed(Message msg, long delayMillis) 将消息加入消息队列。如：sendMessageDelayed(getPostMessage(r), delayMillis);
+      //内部调用：通过 public final boolean sendMessageDelayed(Message msg, long delayMillis) 将消息加入消息队列。如：sendMessageDelayed(getPostMessage(r, token), delayMillis);
+
+     （4） public final boolean postAtFrontOfQueue(Runnable r)
+      //介绍：向实现 Runnable 的对象发布消息。使 Runnable r 在消息队列的下一次迭代中执行。可运行对象将在附加此处理程序的线程上运行。这种方法只在非常特殊的情况下使用——它很容易使消息队列饿死，导致排序问题，或者有其他意想不到的副作用。
+      //返回值说明：如果消息已成功放入消息队列，则返回 true。失败时返回 false，通常是因为处理消息队列的 looper 正在退出。
+      //内部调用：通过 public final boolean sendMessageAtFrontOfQueue(Message msg) 将消息加入消息队列。如：sendMessageAtFrontOfQueue(getPostMessage(r));
+
+    4.删除消息及任务（Runnable）：
+     （1）public final void removeMessages(int what);
+     //介绍：根据传入的what，删除消息队列中符合条件的Message。
+     //内部调用：通过 MessageQueue的 void removeMessages(Handler h, int what, Object object) 函数，将符合条件的Message移除。如：mQueue.removeMessages(this, what, null);
+
+     （2）public final void removeMessages(int what, Object object);
+     //介绍：根据传入的what，object。删除消息队列中符合条件的Message。如果object为 null，则所有what符合的Message都将被删除。
+     //内部调用：通过 MessageQueue的 void removeMessages(Handler h, int what, Object object) 函数，将符合条件的Message移除。如：mQueue.removeMessages(this, what, object);
+
+     （3）public final void removeCallbacksAndMessages(Object token);
+     //介绍：删除所有待处理的任务(Runnable)和obj为token的已发送Message。如果token为 null，则所有任务(Runnable)和Message都将被删除。
+     //内部调用：通过 MessageQueue的 void removeCallbacksAndMessages(Handler h, Object object) 函数，将符合条件的callback与Message移除。如：mQueue.removeCallbacksAndMessages(this, token);
+
+     （4）public final void removeCallbacks(Runnable r);
+     //介绍：删除消息队列中待处理的任务 (Runnable)。
+     //内部调用：通过MessageQueue的 void removeMessages(Handler h, Runnable r, Object object) 函数，删除对应的Runnable。如：mQueue.removeMessages(this, r, null);

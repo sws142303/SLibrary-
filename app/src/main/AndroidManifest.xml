@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
@@ -21,7 +25,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".study.testview.TestViewActivity"></activity>
+        <activity
+            android:name=".study.handler.HandlerActivity"
+            android:exported="false" />
+        <activity android:name=".study.zipfile.ZipFIleActivity" />
+        <activity android:name=".study.testview.TestViewActivity" />
         <activity android:name=".study.thread.TestThreadActivity" />
         <activity android:name=".study.datebinding.TestDataBindingActivity" />
         <activity android:name=".study.kotlin.language.TestKotlinActivity" />

@@ -1,0 +1,15 @@
+Message其实就是一个数据类（通过Parcelable，实现序列化）。提供一些字段用于数据传输。对外提供 obtain()相关函数，用于回收Message实例。
+
+需注意：Message内部定义池数量最大值为50.(private static final int MAX_POOL_SIZE = 50;)
+
+Message提供传输字段及字段类型：
+
+public int what;
+
+public int arg1;
+
+public int arg2;
+
+public Object obj;
+
+public Messenger replyTo;

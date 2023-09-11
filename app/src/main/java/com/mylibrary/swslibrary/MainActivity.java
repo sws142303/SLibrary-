@@ -19,8 +19,10 @@ import com.mylibrary.stools.base.mvvm.base.BaseActivity;
 import com.mylibrary.swslibrary.databinding.ActivityMainBinding;
 import com.mylibrary.swslibrary.permission.PermissionActivity;
 import com.mylibrary.swslibrary.study.datebinding.TestDataBindingActivity;
+import com.mylibrary.swslibrary.study.handler.HandlerActivity;
 import com.mylibrary.swslibrary.study.testview.TestViewActivity;
 import com.mylibrary.swslibrary.study.thread.TestThreadActivity;
+import com.mylibrary.swslibrary.study.zipfile.ZipFIleActivity;
 
 import java.util.List;
 
@@ -30,7 +32,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
             {
                     "权限",
                     "线程",
-                    "自定义View"
+                    "自定义View",
+                    "Android-ZipFile",
+                    "Handle"
             };
 
     @Override
@@ -113,6 +117,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainVM> {
             case 2:
                 //自定义View
                 startActivity(new Intent(this, TestViewActivity.class));
+                break;
+
+            case 3:
+                //Android文件压缩 解压缩
+                startActivity(new Intent(this, ZipFIleActivity.class));
+                break;
+            case 4:
+                //Handle
+                startActivity(new Intent(this, HandlerActivity.class));
                 break;
         }
     }

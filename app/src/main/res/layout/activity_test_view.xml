@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mylibrary.swslibrary.study.testview.MyDrawOrderView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".study.testview.TestViewActivity">
 
-    <com.mylibrary.swslibrary.study.testview.MyView
+    <!--<com.mylibrary.swslibrary.study.testview.MyView
         android:id="@+id/mVView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>-->
+    <ImageView
+        android:src="@mipmap/icon_my_header"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</LinearLayout>
+</com.mylibrary.swslibrary.study.testview.MyDrawOrderView>

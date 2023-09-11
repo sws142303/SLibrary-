@@ -1,12 +1,11 @@
 package com.mylibrary.swslibrary;
 
-import android.app.Application;
-
 import androidx.multidex.MultiDex;
 
 import com.mylibrary.stools.base.mvvm.base.BaseApplication;
 import com.mylibrary.stools.permission.XXPermissions;
 import com.mylibrary.swslibrary.permission.PermissionInterceptor;
+import com.mylibrary.swslibrary.study.zipfile.FileCompressionTool;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -26,5 +25,8 @@ public class MyApp extends BaseApplication {
 
         // 设置权限申请拦截器（全局设置）
         XXPermissions.setInterceptor(new PermissionInterceptor());
+
+        //初始化压缩工具
+        FileCompressionTool.getInstance().init(this);
     }
 }
